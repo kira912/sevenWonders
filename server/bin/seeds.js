@@ -1,8 +1,7 @@
 const Card = require('../models/card')
 const mongoose = require('mongoose')
 
-let cardsAge1 = [
-    {
+let cardsAge1 = [{
         name: "Chantier",
         age: 1,
         value: {
@@ -85,7 +84,7 @@ let cardsAge1 = [
         name: "Exploitation Forestière",
         age: 1,
         value: {
-            3: 1, 
+            3: 1,
             2: 1
         },
         price: {
@@ -98,7 +97,7 @@ let cardsAge1 = [
         name: "Gisement",
         age: 1,
         value: {
-            2: 1, 
+            2: 1,
             4: 1
         },
         price: {
@@ -111,7 +110,7 @@ let cardsAge1 = [
         name: "Mine",
         age: 1,
         value: {
-            4: 1, 
+            4: 1,
             3: 1
         },
         price: {
@@ -213,7 +212,7 @@ let cardsAge1 = [
             2: 1,
             4: 1,
             right: true,
-            left: false 
+            left: false
         },
         price: {},
         cardColor: 4,
@@ -310,14 +309,32 @@ let cardsAge1 = [
     },
 ]
 
-let deckAge1 = []
+async function cleanup() {
 
-cardsAge1.forEach((card) => {
-    let newCard = new Card(card.name, card.age, card.value, card.price, card.cardColor, card.numberPlayer)
-    deckAge1.push(newCard)
-})
+    let cleanup = await Card.deleteMany({})
+
+    return cleanup;
+}
+
+async function seedsCards() {
+    const cards = await Card.create(cardsAge1)
+
+    console.log(cards)
+    return {
+        cardsAgeOne: cards
+    }
+}
+
+function disconnect() {
+    return mongoose.connection.close()
+}
 
 mongoose.connect("mongodb://localhost/sevenWonders", {
-    useNewUrlParser: true
-})
-console.log(deckAge1)
+        useNewUrlParser: true
+    })
+    .then(cleanup)
+    .then(seedsCards)
+    .catch(err => {
+        console.log(err)
+    })
+    .then(disconnect)

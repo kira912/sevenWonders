@@ -1,22 +1,20 @@
 const mongoose = require('mongoose')
 const { Schema } = mongoose
 
-const CardSchema = new Schema(
-    {
-        name: {
-            type: String,
-            required: true
-        },
-        age: Number,
-        value: Object,
-        price: {
-            type: Object,
-            default: {}
-        },
-        cardColor: Number,
-        numberPlayer: Array
-    }
-)
+const CardSchema = new Schema({
+    name: {
+        type: String,
+        required: true
+    },
+    age: Number,
+    value: Object,
+    price: {
+        type: Object,
+        default: {}
+    },
+    cardColor: Number,
+    numberPlayer: Array
+})
 
 
 // const cardColor = {
