@@ -1,0 +1,23 @@
+{
+  "name": "sevenwonders",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/kira912/sevenWonders.git"
+  },
+  "author": "Valentin Perot",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/kira912/sevenWonders/issues"
+  },
+  "homepage": "https://github.com/kira912/sevenWonders#readme",
+  "dependencies": {
+    "commander": "^3.0.0",
+    "express": "^4.17.1"
+  }
+}
