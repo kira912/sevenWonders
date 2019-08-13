@@ -1,5 +1,17 @@
-const Card = require('./models/card')
+const Player = require('./models/player')
+const WonderRoute = require("./routes/wonders")
+let axios = require ("axios")
+const apiUrl = "http://localhost:3000"
 
-let card1 = new Card('test', '2', '5', '4', '345')
+axios.get(apiUrl + '/wonders')
+.then(response => {
+    console.log(response.data)
+})
+.catch(err => {
+    console.log(err)
+})
 
-console.log(card1)
+// let player1 = {
+//     name: "Player1",
+
+// }

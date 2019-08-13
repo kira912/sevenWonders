@@ -39,15 +39,4 @@ const cardRessource = {
 
 }
 
-// class Card {
-//     constructor(name, age, value, price, cardColor, numberPlayer) {
-//         this.name = name
-//         this.age = age
-//         this.value = value
-//         this.price = price
-//         this.cardColor = cardColor
-//         this.numberPlayer = numberPlayer
-//     }
-// }
-
 module.exports = mongoose.model("Card", CardSchema)

@@ -4,17 +4,27 @@ const path = require('path');
 const cookieParser = require('cookie-parser');
 const logger = require('morgan');
 const mongoose = require('mongoose')
+const cors = require('cors')
 
-// var indexRouter = require('./routes/index');
-// var usersRouter = require('./routes/users');
+let wonderRouter = require('./routes/wonders');
+let cardsRouter = require('./routes/cards');
+let gameRouter = require('./routes/game');
 
 let app = express();
 
 mongoose.connect("mongodb://localhost/sevenWonders", { useNewUrlParser: true })
 
+if (app.get("env") === "development") {
+  app.use(
+    cors({
+      origin: "http://localhost:8082"
+    })
+  );
+}
+
 // view engine setup
-// app.set('views', path.join(__dirname, 'views'));
-// app.set('view engine', 'jade');
+app.set('views', path.join(__dirname, 'views'));
+app.set('view engine', 'jade');
 
 app.use(logger('dev'));
 app.use(express.json());
@@ -22,8 +32,9 @@ app.use(express.urlencoded({ extended: false }));
 app.use(cookieParser());
 app.use(express.static(path.join(__dirname, 'public')));
 
-// app.use('/', indexRouter);
-// app.use('/users', usersRouter);
+app.use('/wonders', wonderRouter);
+app.use('/cards', cardsRouter);
+app.use('/game', gameRouter);
 
 // catch 404 and forward to error handler
 app.use(function(req, res, next) {

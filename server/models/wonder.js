@@ -11,7 +11,7 @@ const WonderSchema = new mongoose.Schema({
   },
   faceA: {
     type: Object,
-    steps: [{
+    stepOne: {
       type: Object,
       price: {
         type: Object,
@@ -25,34 +25,73 @@ const WonderSchema = new mongoose.Schema({
           type: Object,
           isActive: {
             type: Boolean,
-            default: false
-          },
-          data: Number
-        },
-        addResources: {
-          type: Object,
-          isActive: {
-            type: Boolean,
-            default: false
+            default: true
           },
           data: {
-            type: Object,
-            default: {}
+            type: Number,
+            default: 3
           }
         },
-        specialStep: {
+        // addResources: {
+        //   type: Object,
+        //   isActive: {
+        //     type: Boolean,
+        //     default: false
+        //   },
+        //   data: {
+        //     type: Object,
+        //     default: {}
+        //   }
+        // },
+        // specialStep: {
+        //   type: Object,
+        //   isActive: {
+        //     type: Boolean,
+        //     default: false
+        //   },
+        //   data: {
+        //     type: Object,
+        //     default: {}
+        //   }
+        // }
+      }
+    },
+    stepTwo: {
+      type: Object,
+      default: this.faceAStepOne,
+      price: {
+        type: Object,
+        required: true,
+        default: {}
+      },
+      value: {
+        type: Object,
+        default: {}
+      }
+    },
+    stepThree: {
+      type: Object,
+      default: this.faceAStepThree,
+      price: {
+        type: Object,
+        required: true,
+        default: {}
+      },
+      value: {
+        type: Object,
+        addScore: {
           type: Object,
           isActive: {
             type: Boolean,
-            default: false
+            default: true
           },
           data: {
-            type: Object,
-            default: {}
+            type: Number,
+            default: 7
           }
         }
       }
-    }]
+    }
   },
   faceB: {
     type: Object,
@@ -99,7 +138,26 @@ const WonderSchema = new mongoose.Schema({
       }
     }]
   }
-
 })
+
+const faceAStepOne = {
+  price: {},
+  value: {
+    addScore: {
+      isActive: true,
+      data: 3
+    }
+  }
+}
+
+const faceAStepThree = {
+  price: {},
+  value: {
+    addScore: {
+      isActive: true,
+      data: 7
+    }
+  }
+}
 
 module.exports = mongoose.model("Wonder", WonderSchema)

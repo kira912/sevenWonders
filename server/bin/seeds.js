@@ -310,12 +310,12 @@ let cardsAge1 = [{
   },
 ]
 
-const wondersList = [{
-  name: "Le Colosse de Rhodes",
-  defaultResource: 4,
-  faceA: {
-    steps: [
-      stepOne = {
+const wondersList = [
+  {
+    name: "Le Colosse de Rhodes",
+    defaultResource: 4,
+    faceA: {
+      stepOne: {
         price: {
           2: 2
         },
@@ -326,7 +326,7 @@ const wondersList = [{
           }
         }
       },
-      stepTwo = {
+      stepTwo: {
         price: {
           1: 3
         },
@@ -339,7 +339,7 @@ const wondersList = [{
           }
         }
       },
-      stepThree = {
+      stepThree: {
         price: {
           4: 4
         },
@@ -350,14 +350,58 @@ const wondersList = [{
           }
         }
       }
-    ]
-  }
-}]
+    }
+  },
+  {
+    name: "Le phare d’Alexandrie",
+    defaultResource: 5,
+    faceA: {
+      stepOne: {
+        price: {
+          3: 2
+        },
+        value: {
+          addScore: {
+            isActive: true,
+            data: 3
+          }
+        }
+      },
+      stepTwo: {
+        price: {
+          4: 2
+        },
+        value: {
+          addResources: {
+            isActive: true,
+            data: {
+              1: 1,
+              4: 1,
+              2: 1,
+              3: 1
+            }
+          }
+        }
+      },
+      stepThree: {
+        price: {
+          5: 4
+        },
+        value: {
+          addScore: {
+            isActive: true,
+            data: 7
+          }
+        }
+      }
+    }
+  },
+]
 
 async function cleanup() {
 
   let cleanup = await Card.deleteMany({})
-  // cleanup = await Wonder.deleteMany({})
+  cleanup = await Wonder.deleteMany({})
 
   return cleanup;
 }
