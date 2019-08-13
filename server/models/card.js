@@ -17,27 +17,27 @@ const CardSchema = new Schema({
 })
 
 
-// const cardColor = {
-//     "Brown": 1,
-//     "Grey": 2,
-//     "Blue": 3,
-//     "Yellow": 4,
-//     "Red": 5,
-//     "Green": 6,
-//     "Purple": 7
-// }
+const cardColor = {
+    "Brown": 1,
+    "Grey": 2,
+    "Blue": 3,
+    "Yellow": 4,
+    "Red": 5,
+    "Green": 6,
+    "Purple": 7
+}
 
-// const cardRessource = {
-//     "Clay": 1,
-//     "Wood": 2,
-//     "Stones": 3,
-//     "Ore": 4,
-//     "Glass": 5,
-//     "Fabric": 6,
-//     "Papyrus": 7,
-//     "Gold": 8
+const cardRessource = {
+    "Clay": 1,
+    "Wood": 2,
+    "Stones": 3,
+    "Ore": 4,
+    "Glass": 5,
+    "Fabric": 6,
+    "Papyrus": 7,
+    "Gold": 8
 
-// }
+}
 
 // class Card {
 //     constructor(name, age, value, price, cardColor, numberPlayer) {

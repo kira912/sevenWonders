@@ -101,3 +101,5 @@ const WonderSchema = new mongoose.Schema({
   }
 
 })
+
+module.exports = mongoose.model("Wonder", WonderSchema)
