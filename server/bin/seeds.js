@@ -2,312 +2,56 @@ const Card = require('../models/card')
 const Wonder = require('../models/wonder')
 const mongoose = require('mongoose')
 
-let cardsAge1 = [{
-    name: "Chantier",
-    age: 1,
-    value: {
-      2: 1
-    },
-    price: {},
-    color: 1,
-    numberPlayer: [3, 4]
-  },
-  {
-    name: "Cavité",
-    age: 1,
-    value: {
-      3: 1
-    },
-    price: {},
-    color: 1,
-    numberPlayer: [3, 5]
-  },
-  {
-    name: "Bassin Argileux",
-    age: 1,
-    value: {
-      1: 1
-    },
-    price: {},
-    color: 1,
-    numberPlayer: [3, 5]
-  },
-  {
-    name: "Filon",
-    age: 1,
-    value: {
-      4: 1
-    },
-    price: {},
-    color: 1,
-    numberPlayer: [3, 4]
-  },
-  {
-    name: "Friche",
-    age: 1,
-    value: {
-      1: 1,
-      2: 1
-    },
-    price: {
-      "gold": 1
-    },
-    color: 1,
-    numberPlayer: [6]
-  },
-  {
-    name: "Excavation",
-    age: 1,
-    value: {
-      1: 1,
-      3: 1
-    },
-    price: {
-      "gold": 1
-    },
-    color: 1,
-    numberPlayer: [4]
-  },
-  {
-    name: "Fosse Argileuse",
-    age: 1,
-    value: {
-      1: 1,
-      4: 1
-    },
-    price: {
-      "gold": 1
-    },
-    color: 1,
-    numberPlayer: [3]
-  },
-  {
-    name: "Exploitation Forestière",
-    age: 1,
-    value: {
-      3: 1,
-      2: 1
-    },
-    price: {
-      "gold": 1
-    },
-    color: 1,
-    numberPlayer: [3]
-  },
-  {
-    name: "Gisement",
-    age: 1,
-    value: {
-      2: 1,
-      4: 1
-    },
-    price: {
-      "gold": 1
-    },
-    color: 1,
-    numberPlayer: [5]
-  },
-  {
-    name: "Mine",
-    age: 1,
-    value: {
-      4: 1,
-      3: 1
-    },
-    price: {
-      8: 1
-    },
-    color: 1,
-    numberPlayer: [6]
-  },
-  {
-    name: "Metier à tisser",
-    age: 1,
-    value: {
-      6: 1
-    },
-    price: {},
-    color: 2,
-    numberPlayer: [3, 6]
-  },
-  {
-    name: "Verrerie",
-    age: 1,
-    value: {
-      5: 1
-    },
-    price: {},
-    color: 2,
-    numberPlayer: [3, 6]
-  },
-  {
-    name: "Presse",
-    age: 1,
-    value: {
-      7: 1
-    },
-    price: {},
-    color: 2,
-    numberPlayer: [3, 6]
-  },
-  {
-    name: "Prêteur sur gages",
-    age: 1,
-    value: {
-      7: 1
-    },
-    price: {},
-    color: 2,
-    numberPlayer: [3, 6]
-  },
-  {
-    name: "Prêteur sur gages",
-    age: 1,
-    value: 3,
-    price: {},
-    color: 2,
-    numberPlayer: [4, 7]
-  },
-  {
-    name: "Bains",
-    age: 1,
-    value: 3,
-    price: {
-      3: 1
-    },
-    color: 3,
-    numberPlayer: [3, 7]
-  },
-  {
-    name: "Autel",
-    age: 1,
-    value: 2,
-    price: {},
-    color: 3,
-    numberPlayer: [3, 5]
-  },
-  {
-    name: "Theatre",
-    age: 1,
-    value: 2,
-    price: {},
-    color: 3,
-    numberPlayer: [3, 6]
-  },
-  {
-    name: "Taverne",
-    age: 1,
-    value: {
-      8: 5
-    },
-    price: {},
-    color: 4,
-    numberPlayer: [4, 5, 7]
-  },
-  {
-    name: "Comptoir Est",
-    age: 1,
-    value: {
-      1: 1,
-      3: 1,
-      2: 1,
-      4: 1,
-      right: true,
-      left: false
-    },
-    price: {},
-    color: 4,
-    numberPlayer: [3, 7]
-  },
-  {
-    name: "Comptoir Ouest",
-    age: 1,
-    value: {
-      1: 1,
-      3: 1,
-      2: 1,
-      4: 1,
-      right: false,
-      left: true
-    },
-    price: {},
-    color: 2,
-    numberPlayer: [3, 7]
-  },
-  {
-    name: "Marché",
-    age: 1,
-    value: {
-      5: 1,
-      6: 1,
-      7: 1,
-      right: true,
-      left: true
-    },
-    price: {},
-    color: 4,
-    numberPlayer: [3, 6]
-  },
-  {
-    name: "Palissade",
-    age: 1,
-    value: 1,
-    price: {
-      2: 1
-    },
-    color: 5,
-    numberPlayer: [3, 7]
-  },
-  {
-    name: "Caserne",
-    age: 1,
-    value: 1,
-    price: {
-      4: 1
-    },
-    color: 5,
-    numberPlayer: [3, 5]
-  },
-  {
-    name: "Tour de Garde",
-    age: 1,
-    value: 1,
-    price: {
-      1: 1
-    },
-    color: 5,
-    numberPlayer: [3, 4]
-  },
-  {
-    name: "Officine",
-    age: 1,
-    value: 1,
-    price: {
-      6: 1
-    },
-    color: 6,
-    numberPlayer: [3, 5]
-  },
-  {
-    name: "Atelier",
-    age: 1,
-    value: 2,
-    price: {
-      5: 1
-    },
-    color: 6,
-    numberPlayer: [3, 5]
-  },
-  {
-    name: "Scriptorium",
-    age: 1,
-    value: 2,
-    price: {
-      7: 1
-    },
-    color: 6,
-    numberPlayer: [3, 4]
-  },
+let cardsAge1 = [
+  { name: "Lumber Yard", age: 1, data: { 2: 1 }, price: {}, color: 1, numberPlayer: 3 },
+  { name: "Lumber Yard", age: 1, data: { 2: 1 }, price: {}, color: 1, numberPlayer: 4 },
+  { name: "Ore Vein", age: 1, data: { 4: 1 }, price: {}, color: 1, numberPlayer: 3 },
+  { name: "Ore Vein", age: 1, data: { 4: 1 }, price: {}, color: 1, numberPlayer: 4 },
+  { name: "Clay pool", age: 1, data: { 1: 1 }, price: {}, color: 1, numberPlayer: 3 },
+  { name: "Clay pool", age: 1, data: { 1: 1 }, price: {}, color: 1, numberPlayer: 5 },
+  { name: "Stone pit", age: 1, data: { 3: 1 }, price: {}, color: 1, numberPlayer: 3 },
+  { name: "Stone pit", age: 1, data: { 3: 1 }, price: {}, color: 1, numberPlayer: 5 },
+  { name: "Timber yard", age: 1, data: { 3: 1, 2: 1 }, price: { 8: 1 }, color: 1, numberPlayer: 3 },
+  { name: "Clay pit", age: 1, data: { 1: 1, 3: 1 }, price: { 8: 1 }, color: 1, numberPlayer: 3 },
+  { name: "Excavation", age: 1, data: { 3: 1, 1: 1 }, price: { 8: 1 }, color: 1, numberPlayer: 4 },
+  { name: "Forest cave", age: 1, data: { 2: 1, 4: 1 }, price: { 8: 1 }, color: 1, numberPlayer: 5 },
+  { name: "Tree fram", age: 1, data: { 1: 1, 2: 1 }, price: { 8: 1 }, color: 1, numberPlayer: 6 },
+  { name: "Mine", age: 1, data: { 3: 1, 4: 1 }, price: { 8: 1 }, color: 1, numberPlayer: 6 },
+  { name: "Loom", age: 1, data: { 6: 1 }, price: {}, color: 2, numberPlayer: 3 },
+  { name: "Loom", age: 1, data: { 6: 1 }, price: {}, color: 2, numberPlayer: 6 },
+  { name: "Glassworks", age: 1, data: { 5: 1 }, price: {}, color: 2, numberPlayer: 3 },
+  { name: "Glassworks", age: 1, data: { 5: 1 }, price: {}, color: 2, numberPlayer: 6 },
+  { name: "Press", age: 1, data: { 7: 1 }, price: {}, color: 2, numberPlayer: 3},
+  { name: "Press", age: 1, data: { 7: 1 }, price: {}, color: 2, numberPlayer: 6 },
+  { name: "Est Trading Post", age: 1, data: { 1: 1, 2: 1, 3: 1, 4: 1, left: false, right: true, onlyOnce: false }, price: {}, color: 4, numberPlayer: 3 },
+  { name: "Est Trading Post", age: 1, data: { 1: 1, 2: 1, 3: 1, 4: 1, left: false, right: true, onlyOnce: false }, price: {}, color: 4, numberPlayer: 7 },
+  { name: "West Trading Post", age: 1, data: { 1: 1, 2: 1, 3: 1, 4: 1, left: true, right: false, onlyOnce: false }, price: {}, color: 4, numberPlayer: 3 },
+  { name: "West Trading Post", age: 1, data: { 1: 1, 2: 1, 3: 1, 4: 1, left: true, right: false, onlyOnce: false }, price: {}, color: 4, numberPlayer: 7 },
+  { name: "Marketplace", age: 1, data: { 1: 1, 2: 1, 3: 1, 4: 1, left: true, right: false, onlyOnce: false }, price: {}, color: 4, numberPlayer: 3 },
+  { name: "Marketplace", age: 1, data: { 1: 1, 2: 1, 3: 1, 4: 1, left: true, right: false, onlyOnce: false }, price: {}, color: 4, numberPlayer: 6 },
+  { name: "Tavern", age: 1, data: { 8: 5, onlyOnce: true }, price: {}, color: 4, numberPlayer: 3 },
+  { name: "Tavern", age: 1, data: { 8: 5, onlyOnce: true }, price: {}, color: 4, numberPlayer: 6 },
+  { name: "Tavern", age: 1, data: { 8: 5, onlyOnce: true }, price: {}, color: 4, numberPlayer: 7 },
+  { name: "Alter", age: 1, data: { score: 2 }, price: {}, color: 4, numberPlayer: 3 },
+  { name: "Alter", age: 1, data: { score: 2 }, price: {}, color: 4, numberPlayer: 5 },
+  { name: "Theatre", age: 1, data: { score: 2 }, price: {}, color: 4, numberPlayer: 3 },
+  { name: "Theatre", age: 1, data: { score: 2 }, price: {}, color: 4, numberPlayer: 6 },
+  { name: "Baths", age: 1, data: { score: 3 }, price: { 3: 1 }, color: 4, numberPlayer: 3 },
+  { name: "Baths", age: 1, data: { score: 3 }, price: { 3: 1 }, color: 4, numberPlayer: 7 },
+  { name: "Pawnshop", age: 1, data: { score: 3 }, price: {}, color: 4, numberPlayer: 4 },
+  { name: "Pawnshop", age: 1, data: { score: 3 }, price: {}, color: 4, numberPlayer: 7 },
+  { name: "Stockade", age: 1, data: { shield: 1 }, price: { 2: 1 }, color: 5, numberPlayer: 3 },
+  { name: "Stockade", age: 1, data: { shield: 1 }, price: { 2: 1 }, color: 5, numberPlayer: 7 },
+  { name: "Barracks", age: 1, data: { shield: 1 }, price: { 4: 1 }, color: 5, numberPlayer: 3 },
+  { name: "Barracks", age: 1, data: { shield: 1 }, price: { 4: 1 }, color: 5, numberPlayer: 5 },
+  { name: "Guard Tower", age: 1, data: { shield: 1 }, price: { 1: 1 }, color: 5, numberPlayer: 3 },
+  { name: "Guard Tower", age: 1, data: { shield: 1 }, price: { 1: 1 }, color: 5, numberPlayer: 4 },
+  { name: "Apothecary", age: 1, data: { symbol: 1 }, price: { 6: 1 }, color: 6, numberPlayer: 3 },
+  { name: "Apothecary", age: 1, data: { symbol: 1 }, price: { 6: 1 }, color: 6, numberPlayer: 5 },
+  { name: "Workshop", age: 1, data: { symbol: 2 }, price: { 5: 1 }, color: 6, numberPlayer: 3 },
+  { name: "Workshop", age: 1, data: { symbol: 2 }, price: { 5: 1 }, color: 6, numberPlayer: 7 },
+  { name: "Scriptorium", age: 1, data: { symbol: 3 }, price: { 7: 1 }, color: 6, numberPlayer: 3 },
+  { name: "Scriptorium", age: 1, data: { symbol: 3 }, price: { 7: 1 }, color: 6, numberPlayer: 4 }
 ]
 
 const wondersList = [

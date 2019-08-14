@@ -22,7 +22,7 @@ router.post('/init', asyncMiddleware(async (req, res, next) => {
     game.wonders = await Wonder.find()
     
     if (game.wonders.length > 0) {
-      const gameInit = game.initGame(players)
+      let gameInit = await game.initGame(players)
 
       return res.json(true)
     }
@@ -30,5 +30,9 @@ router.post('/init', asyncMiddleware(async (req, res, next) => {
     res.json(false)
   }
 }))
+
+// router.get('/players', asyncMiddleware(async (req, res, next) => {
+//   res.json(game.players)
+// }))
 
 module.exports = router

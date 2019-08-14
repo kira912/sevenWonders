@@ -4,8 +4,10 @@ class Player {
     this.name = name
     this.wonder = wonder
 
-    this.score, this.gold, this.militaryScore = 0
-    this.deck, this.resources = []
+    this.score, this.militaryScore = 0
+    this.gold = 3
+    this.resources = []
+    this.deck = []
     this.cardsBuilt = {
       civilsBuildings: [],
       scientificBuildings: [],
@@ -14,6 +16,10 @@ class Player {
       rawMaterials: [],
       manufactures: []
     }
+  }
+
+  addDeck(deck) {
+    this.deck = deck
   }
 
   addGold(gold) {

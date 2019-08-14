@@ -6,12 +6,7 @@ Vue.use(Vuex);
 
 export default new Vuex.Store({
   state: {
-    game: {
-      gold: 0,
-      tokenConflicts: 0,
-      players: [],
-      isInit: false
-    },
+    game: {},
     wonders: [],
     players: [],
     cardsAge1: [],

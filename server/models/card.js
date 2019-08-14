@@ -7,13 +7,13 @@ const CardSchema = new Schema({
         required: true
     },
     age: Number,
-    value: Object,
+    data: Object,
     price: {
         type: Object,
         default: {}
     },
     color: Number,
-    numberPlayer: Array
+    numberPlayer: Number
 })
 
 
@@ -37,6 +37,12 @@ const cardRessource = {
     "Papyrus": 7,
     "Gold": 8
 
+}
+
+const scientificSymbol = {
+    "Compass": 1,
+    "Cogs": 2,
+    "Tablet": 3
 }
 
 module.exports = mongoose.model("Card", CardSchema)

@@ -17,7 +17,7 @@ mongoose.connect("mongodb://localhost/sevenWonders", { useNewUrlParser: true })
 if (app.get("env") === "development") {
   app.use(
     cors({
-      origin: "http://localhost:8080"
+      origin: "http://localhost:8082"
     })
   );
 }

@@ -1,11 +1,11 @@
 <template>
   <div>
     <div class="home">
-      {{cardsAge1}}
+      <!-- {{cardsAge1}} -->
       <!-- {{JSON.parse(cardsAge1)}} -->
     </div>
     <div>
-      {{game.isInit}}
+      {{game}}
     </div>
   </div>
 </template>
@@ -24,6 +24,7 @@ export default {
   },
   mounted() {
     this.$store.dispatch('GET_INIT_GAME')
+
     this.$store.dispatch('GET_GAME')
     this.$store.dispatch('GET_WONDERS')
     this.$store.dispatch('GET_CARDS_AGE_1')

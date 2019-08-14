@@ -13,9 +13,10 @@ class Game {
       age2: [],
       age3: []
     }
+    this.trashCards = []
   }
 
-  initGame(playersNameList, params = {}) {
+  async initGame(playersNameList, params = {}) {
     playersNameList.find((name) => {
       const randomWonder = this.wonders[Math.floor(Math.random() * this.wonders.length)]
       let newPlayer = new Player(name, randomWonder)
@@ -23,33 +24,22 @@ class Game {
       this.players.push(newPlayer)
     })
 
-    const cards = Card.find()
-    .then((cardsList) => {
-      let filterCardsNumberPlayers = cardsList.filter((card) => {
-        return card.numberPlayer.includes(this.players.length)
-      })
-
-      console.log(filterCardsNumberPlayers.length)
-      // cardsList.find((card) => {
-      //   if (card.age == 1) {
-      //     const max = Math.max(card.numberPlayer)
-      //     const numberPlayers = this.players.length 
-
-      //     if (max > numberPlayers) {
-      //       console.log(card.numberPlayer)
-      //       // continue
-      //     }
-
-          
-      //     let filter = card.numberPlayer.filter((value) => {
-      //       return value <= numberPlayers
-      //     })
-
-      //     console.log(filter)
-      //   }
-      // })
+    const cardsAge1 = await Card.find({
+      age: 1,
+      numberPlayer: {
+        $lte: this.players.length
+      }
     })
 
+    if (cardsAge1.length > 0) {
+
+      this.players.find((player) => {
+        let shuffled = cardsAge1.sort(() => 0.5 - Math.random());
+        player.addDeck(shuffled.splice(0, 7))
+      })
+
+      this.isInit = true
+    }
   }
 
   get wonders() {
