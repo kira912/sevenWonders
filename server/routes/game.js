@@ -22,7 +22,7 @@ router.post('/init', asyncMiddleware(async (req, res, next) => {
     game.wonders = await Wonder.find()
     
     if (game.wonders.length > 0) {
-      game.initGame(players)
+      const gameInit = game.initGame(players)
 
       return res.json(true)
     }

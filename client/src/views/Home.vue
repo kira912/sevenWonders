@@ -1,8 +1,8 @@
 <template>
   <div>
     <div class="home">
-      {{wonders}}
       {{cardsAge1}}
+      <!-- {{JSON.parse(cardsAge1)}} -->
     </div>
     <div>
       {{game.isInit}}

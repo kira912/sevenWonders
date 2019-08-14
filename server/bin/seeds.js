@@ -9,7 +9,7 @@ let cardsAge1 = [{
       2: 1
     },
     price: {},
-    cardColor: 1,
+    color: 1,
     numberPlayer: [3, 4]
   },
   {
@@ -19,7 +19,7 @@ let cardsAge1 = [{
       3: 1
     },
     price: {},
-    cardColor: 1,
+    color: 1,
     numberPlayer: [3, 5]
   },
   {
@@ -29,7 +29,7 @@ let cardsAge1 = [{
       1: 1
     },
     price: {},
-    cardColor: 1,
+    color: 1,
     numberPlayer: [3, 5]
   },
   {
@@ -39,7 +39,7 @@ let cardsAge1 = [{
       4: 1
     },
     price: {},
-    cardColor: 1,
+    color: 1,
     numberPlayer: [3, 4]
   },
   {
@@ -52,7 +52,7 @@ let cardsAge1 = [{
     price: {
       "gold": 1
     },
-    cardColor: 1,
+    color: 1,
     numberPlayer: [6]
   },
   {
@@ -65,7 +65,7 @@ let cardsAge1 = [{
     price: {
       "gold": 1
     },
-    cardColor: 1,
+    color: 1,
     numberPlayer: [4]
   },
   {
@@ -78,7 +78,7 @@ let cardsAge1 = [{
     price: {
       "gold": 1
     },
-    cardColor: 1,
+    color: 1,
     numberPlayer: [3]
   },
   {
@@ -91,7 +91,7 @@ let cardsAge1 = [{
     price: {
       "gold": 1
     },
-    cardColor: 1,
+    color: 1,
     numberPlayer: [3]
   },
   {
@@ -104,7 +104,7 @@ let cardsAge1 = [{
     price: {
       "gold": 1
     },
-    cardColor: 1,
+    color: 1,
     numberPlayer: [5]
   },
   {
@@ -117,7 +117,7 @@ let cardsAge1 = [{
     price: {
       8: 1
     },
-    cardColor: 1,
+    color: 1,
     numberPlayer: [6]
   },
   {
@@ -127,7 +127,7 @@ let cardsAge1 = [{
       6: 1
     },
     price: {},
-    cardColor: 2,
+    color: 2,
     numberPlayer: [3, 6]
   },
   {
@@ -137,7 +137,7 @@ let cardsAge1 = [{
       5: 1
     },
     price: {},
-    cardColor: 2,
+    color: 2,
     numberPlayer: [3, 6]
   },
   {
@@ -147,7 +147,7 @@ let cardsAge1 = [{
       7: 1
     },
     price: {},
-    cardColor: 2,
+    color: 2,
     numberPlayer: [3, 6]
   },
   {
@@ -157,7 +157,7 @@ let cardsAge1 = [{
       7: 1
     },
     price: {},
-    cardColor: 2,
+    color: 2,
     numberPlayer: [3, 6]
   },
   {
@@ -165,7 +165,7 @@ let cardsAge1 = [{
     age: 1,
     value: 3,
     price: {},
-    cardColor: 2,
+    color: 2,
     numberPlayer: [4, 7]
   },
   {
@@ -175,7 +175,7 @@ let cardsAge1 = [{
     price: {
       3: 1
     },
-    cardColor: 3,
+    color: 3,
     numberPlayer: [3, 7]
   },
   {
@@ -183,7 +183,7 @@ let cardsAge1 = [{
     age: 1,
     value: 2,
     price: {},
-    cardColor: 3,
+    color: 3,
     numberPlayer: [3, 5]
   },
   {
@@ -191,7 +191,7 @@ let cardsAge1 = [{
     age: 1,
     value: 2,
     price: {},
-    cardColor: 3,
+    color: 3,
     numberPlayer: [3, 6]
   },
   {
@@ -201,7 +201,7 @@ let cardsAge1 = [{
       8: 5
     },
     price: {},
-    cardColor: 4,
+    color: 4,
     numberPlayer: [4, 5, 7]
   },
   {
@@ -216,7 +216,7 @@ let cardsAge1 = [{
       left: false
     },
     price: {},
-    cardColor: 4,
+    color: 4,
     numberPlayer: [3, 7]
   },
   {
@@ -231,7 +231,7 @@ let cardsAge1 = [{
       left: true
     },
     price: {},
-    cardColor: 2,
+    color: 2,
     numberPlayer: [3, 7]
   },
   {
@@ -245,7 +245,7 @@ let cardsAge1 = [{
       left: true
     },
     price: {},
-    cardColor: 4,
+    color: 4,
     numberPlayer: [3, 6]
   },
   {
@@ -255,7 +255,7 @@ let cardsAge1 = [{
     price: {
       2: 1
     },
-    cardColor: 5,
+    color: 5,
     numberPlayer: [3, 7]
   },
   {
@@ -265,7 +265,7 @@ let cardsAge1 = [{
     price: {
       4: 1
     },
-    cardColor: 5,
+    color: 5,
     numberPlayer: [3, 5]
   },
   {
@@ -275,7 +275,7 @@ let cardsAge1 = [{
     price: {
       1: 1
     },
-    cardColor: 5,
+    color: 5,
     numberPlayer: [3, 4]
   },
   {
@@ -285,7 +285,7 @@ let cardsAge1 = [{
     price: {
       6: 1
     },
-    cardColor: 6,
+    color: 6,
     numberPlayer: [3, 5]
   },
   {
@@ -295,7 +295,7 @@ let cardsAge1 = [{
     price: {
       5: 1
     },
-    cardColor: 6,
+    color: 6,
     numberPlayer: [3, 5]
   },
   {
@@ -305,7 +305,7 @@ let cardsAge1 = [{
     price: {
       7: 1
     },
-    cardColor: 6,
+    color: 6,
     numberPlayer: [3, 4]
   },
 ]

@@ -35,8 +35,9 @@ export default new Vuex.Store({
   actions: {
     GET_INIT_GAME: async (context, payload) => {
       const { data } = await Axios.post('http://localhost:3000/game/init', {
-        players: ['Player1', 'Player2']
+        players: ['Player1', 'Player2', 'Player3']
       })
+      console.log(data)
       context.commit('SET_INIT_GAME', data);
     },
     GET_GAME: async (context, payload) => {

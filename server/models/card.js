@@ -12,7 +12,7 @@ const CardSchema = new Schema({
         type: Object,
         default: {}
     },
-    cardColor: Number,
+    color: Number,
     numberPlayer: Array
 })
 

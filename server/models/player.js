@@ -14,7 +14,35 @@ class Player {
       rawMaterials: [],
       manufactures: []
     }
+  }
 
+  addGold(gold) {
+    this.gold += gold
+  }
+
+  removeGold(gold) {
+    this.gold -= gold
+  }
+
+  addScore(score) {
+    this.score += score
+  }
+
+  removeScore(score) {
+    this.score -= score
+  }
+
+  addMilitaryScore(score) {
+    this.militaryScore += score
+  }
+
+  buildCard(card) {
+    const cardType = card.color
+    console.log(card)
+  }
+
+  removeMilitaryScore(score) {
+    this.militaryScore -= score
   }
 }
 
