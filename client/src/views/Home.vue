@@ -25,9 +25,12 @@ export default {
   mounted() {
     this.$store.dispatch('GET_INIT_GAME')
 
-    this.$store.dispatch('GET_GAME')
-    this.$store.dispatch('GET_WONDERS')
-    this.$store.dispatch('GET_CARDS_AGE_1')
+    console.log(this.game)
+    if (this.game.isInit) {
+      this.$store.dispatch('GET_GAME')
+    }
+    // this.$store.dispatch('GET_WONDERS')
+    // this.$store.dispatch('GET_CARDS_AGE_1')
   }
 };
 </script>

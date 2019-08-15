@@ -17,7 +17,7 @@ class Game {
   }
 
   async initGame(playersNameList, params = {}) {
-    playersNameList.find((name) => {
+    playersNameList.forEach((name) => {
       const randomWonder = this.wonders[Math.floor(Math.random() * this.wonders.length)]
       let newPlayer = new Player(name, randomWonder)
 
@@ -31,15 +31,39 @@ class Game {
       }
     })
 
-    if (cardsAge1.length > 0) {
+    if ((cardsAge1.length - 1) % this.players.length === 0) {
 
-      this.players.find((player) => {
-        let shuffled = cardsAge1.sort(() => 0.5 - Math.random());
+      this.players.forEach((player) => {
+        let shuffled = [...cardsAge1.sort(() => 0.5 - Math.random())]
         player.addDeck(shuffled.splice(0, 7))
       })
+      
+      const distribSuccess = this.distribCardsSuccess(cardsAge1)
+      
+      if (!distribSuccess) {
+        return false
+      }
 
       this.isInit = true
+
+      return true
     }
+
+    return false
+  }
+
+  distribCardsSuccess(cards) {
+    const mapDeckPlayers = this.players.map((player) => player.deck)
+    let badDistrib = false
+
+    // mapDeckPlayers[1] = []
+    mapDeckPlayers.forEach((deck) => {
+      if (deck.length != (cards.length - 1) / this.players.length) {
+        badDistrib = true
+      }
+    })
+
+    return !badDistrib ? true : false 
   }
 
   get wonders() {

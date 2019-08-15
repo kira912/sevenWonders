@@ -32,12 +32,10 @@ export default new Vuex.Store({
       const { data } = await Axios.post('http://localhost:3000/game/init', {
         players: ['Player1', 'Player2', 'Player3']
       })
-      console.log(data)
       context.commit('SET_INIT_GAME', data);
     },
     GET_GAME: async (context, payload) => {
       const { data } = await Axios.get('http://localhost:3000/game')
-      console.log(data)
       context.commit('SET_GAME', data)
     },
     GET_WONDERS: async (context, payload) => {
@@ -65,8 +63,5 @@ export default new Vuex.Store({
     game: (state) => {
       return state.game
     },
-    // gameInit: (state) => {
-    //   return state.game.isInit
-    // }
   }
 });
