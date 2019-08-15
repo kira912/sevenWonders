@@ -11,7 +11,32 @@ export default new Vuex.Store({
     players: [],
     cardsAge1: [],
     cardsAge2: [],
-    cardsAge3: []
+    cardsAge3: [],
+    cardsResourcesParsed: [],
+    cardColor: {
+      'Brown': 1,
+      'Grey': 2,
+      'Blue': 3,
+      'Yellow': 4,
+      'Red': 5,
+      'Green': 6,
+      'Purple': 7
+    },
+    cardRessource: {
+      Clay: 1,
+      Wood: 2,
+      Stones: 3,
+      Ore: 4,
+      Glass: 5,
+      Fabric: 6,
+      Papyrus: 7,
+      Gold: 8
+    },
+    scientificSymbol: {
+      "Compass": 1,
+      "Cogs": 2,
+      "Tablet": 3
+    }
   },
   mutations: {
     SET_INIT_GAME: (state, isInit) => {
@@ -23,12 +48,12 @@ export default new Vuex.Store({
     SET_WONDERS: (state, wonders) => {
       state.wonders = wonders
     },
-    SET_CARDS_AGE_1: (state, cards) => {
-      state.cardsAge1 = cards
+    SET_CARDS_RESOURCES_TYPE: (state, cards) => {
+      state.cardsResourcesParsed = cards
     }
   },
   actions: {
-    GET_INIT_GAME: async (context, payload) => {
+    INIT_GAME: async (context, payload) => {
       const { data } = await Axios.post('http://localhost:3000/game/init', {
         players: ['Player1', 'Player2', 'Player3']
       })
@@ -42,9 +67,11 @@ export default new Vuex.Store({
       const { data } = await Axios.get('http://localhost:3000/wonders')
       context.commit('SET_WONDERS', data);
     },
-    GET_CARDS_AGE_1: async (context, payload) => {
-      const { data } = await Axios.get('http://localhost:3000/cards/age1')
-      context.commit('SET_CARDS_AGE_1', data)
+    GET_CARDS_RESOURCES_TYPE: async (context, payload) => {
+      const { data } = await Axios.post('http://localhost:3000/game/getResourcesTypes', {
+        cards: payload
+      })
+      context.commit('SET_CARDS_RESOURCES_TYPE', data)
     }
   },
   getters: {
@@ -63,5 +90,8 @@ export default new Vuex.Store({
     game: (state) => {
       return state.game
     },
+    resourcesValue: (state) => {
+      return state.cardRessource
+    }
   }
 });
