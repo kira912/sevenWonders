@@ -14,13 +14,13 @@ export default new Vuex.Store({
     cardsAge3: [],
     cardsResourcesParsed: [],
     cardColor: {
-      'Brown': 1,
-      'Grey': 2,
-      'Blue': 3,
-      'Yellow': 4,
-      'Red': 5,
-      'Green': 6,
-      'Purple': 7
+      brown: 1,
+      grey: 2,
+      blue: 3,
+      yellow: 4,
+      red: 5,
+      green: 6,
+      purple: 7
     },
     cardRessource: {
       Clay: 1,
@@ -33,9 +33,9 @@ export default new Vuex.Store({
       Gold: 8
     },
     scientificSymbol: {
-      "Compass": 1,
-      "Cogs": 2,
-      "Tablet": 3
+      Compass: 1,
+      Cogs: 2,
+      Tablet: 3
     }
   },
   mutations: {
@@ -67,12 +67,12 @@ export default new Vuex.Store({
       const { data } = await Axios.get('http://localhost:3000/wonders')
       context.commit('SET_WONDERS', data);
     },
-    GET_CARDS_RESOURCES_TYPE: async (context, payload) => {
-      const { data } = await Axios.post('http://localhost:3000/game/getResourcesTypes', {
-        cards: payload
-      })
-      context.commit('SET_CARDS_RESOURCES_TYPE', data)
-    }
+    // GET_CARDS_RESOURCES_TYPE: async (context, payload) => {
+    //   const { data } = await Axios.post('http://localhost:3000/game/getResourcesTypes', {
+    //     cards: payload
+    //   })
+    //   context.commit('SET_CARDS_RESOURCES_TYPE', data)
+    // }
   },
   getters: {
     wonders: (state) => {
@@ -92,6 +92,9 @@ export default new Vuex.Store({
     },
     resourcesValue: (state) => {
       return state.cardRessource
+    },
+    cardColor: (state) => {
+      return state.cardColor
     }
   }
 });

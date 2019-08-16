@@ -14,6 +14,8 @@ const CardSchema = new Schema({
     },
     color: Number,
     numberPlayer: Number
+}, {
+    minimize: false
 })
 
 
