@@ -1,21 +1,22 @@
 const mongoose = require('mongoose')
 const { Schema } = mongoose
+const uuid = require('uuid')
 
 const CardSchema = new Schema({
-    name: {
-        type: String,
-        required: true
-    },
-    age: Number,
-    data: Object,
-    price: {
-        type: Object,
-        default: {}
-    },
-    color: Number,
-    numberPlayer: Number
-}, {
-    minimize: false
+  name: {
+    type: String,
+    required: true
+  },
+  age: Number,
+  data: Object,
+  price: {
+    type: Object,
+    default: {
+      free: true
+    }
+  },
+  color: Number,
+  numberPlayer: Number,
 })
 
 

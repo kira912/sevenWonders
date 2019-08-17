@@ -31,11 +31,11 @@ class Game {
       }
     })
 
-    if ((cardsAge1.length - 1) % this.players.length === 0) {
+    if ((cardsAge1.length) % this.players.length === 0) {
 
       this.players.forEach((player) => {
-        let shuffled = [...cardsAge1.sort(() => 0.5 - Math.random())]
-        player.addDeck(shuffled.splice(0, 7))
+        cardsAge1.sort(() => 0.5 - Math.random())
+        player.addDeck(cardsAge1.splice(0, 7))
       })
       
       const distribSuccess = this.distribCardsSuccess(cardsAge1)
@@ -58,7 +58,7 @@ class Game {
 
     // mapDeckPlayers[1] = []
     mapDeckPlayers.forEach((deck) => {
-      if (deck.length != (cards.length - 1) / this.players.length) {
+      if (deck.length != (cards.length) / this.players.length) {
         badDistrib = true
       }
     })

@@ -35,7 +35,7 @@
           </v-container>
           <v-card-actions>
             <v-spacer></v-spacer>
-            <v-btn color="primary">Build Card</v-btn>
+            <v-btn color="primary" :disabled="isBuyableCard(player, card)" @click="buildCard(player.name, card._id)">Build Card</v-btn>
             <v-btn color="primary">Discard Card</v-btn>
           </v-card-actions>
         </v-card>
@@ -51,6 +51,7 @@ export default {
   name: 'home',
   data() {
     return {
+      processCards: {}
     }
   },
   computed: {
@@ -73,14 +74,28 @@ export default {
         return this.cardColor[key] == value
       })
     },
-    processCards: function(card) {
+    buildCard: function(player, card) {
+      this.$store.dispatch('BUILD_CARD', {
+        playerName: player,
+        cardId: card
+      })
+    },
+    isBuyableCard(player, card) {
+      // this.game.players.find((player) => {
+        // if (player._id == playerObject._id) {
+          if (card.price.free) {
+            return false
+          }
 
+          console.log(player)
+        // }
+      // })
+      return true
     }
   },
   mounted() {
     this.$store.dispatch('INIT_GAME')
 
-    console.log(this.game)
     if (this.game) {
       this.$store.dispatch('GET_GAME')
       // this.$store.dispatch('GET_CARDS_RESOURCES_TYPE' )

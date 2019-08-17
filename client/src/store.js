@@ -50,6 +50,9 @@ export default new Vuex.Store({
     },
     SET_CARDS_RESOURCES_TYPE: (state, cards) => {
       state.cardsResourcesParsed = cards
+    },
+    SET_BUILD_CARD: (state, player) => {
+      
     }
   },
   actions: {
@@ -67,6 +70,13 @@ export default new Vuex.Store({
       const { data } = await Axios.get('http://localhost:3000/wonders')
       context.commit('SET_WONDERS', data);
     },
+    BUILD_CARD: async (context, payload) => {
+      const { data } = await Axios.post('http://localhost:3000/game/player/buildCard', {
+        playerName: payload.playerName,
+        card: payload.cardId
+      })
+      context.commit('SET_BUILD_CARD', data)
+    }
     // GET_CARDS_RESOURCES_TYPE: async (context, payload) => {
     //   const { data } = await Axios.post('http://localhost:3000/game/getResourcesTypes', {
     //     cards: payload
