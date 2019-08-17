@@ -33,10 +33,15 @@ router.post('/player/buildCard', asyncMiddleware(async (req, res, next) => {
     return player.name == req.body.playerName
   })
 
-  console.log(player)
-  let card = req.body.card
+  if (player) {
+    let card = player.deck.find((card) => {
+      return card._id == req.body.cardId
+    })
 
-
+    if (card) {
+      player.buildCard(card)
+    }
+  }
 }))
 
 module.exports = router

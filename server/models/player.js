@@ -14,7 +14,8 @@ class Player {
       commercialBuildings: [],
       militaryBuildings: [],
       rawMaterials: [],
-      manufactures: []
+      manufactures: [],
+      guilds: []
     }
   }
 
@@ -45,6 +46,35 @@ class Player {
   buildCard(card) {
     const cardType = card.color
     console.log(card)
+
+    if (card.price.free) {
+      switch(cardType) {
+        case 1:
+          this.cardsBuilt.rawMaterials.push(card)
+          break
+        case 2:
+          this.cardsBuilt.manufactures.push(card)
+          break
+        case 3:
+          this.cardsBuilt.civilsBuildings.push(card)
+          break
+        case 4:
+          this.cardsBuilt.commercialBuildings.push(card)
+          break
+        case 5:
+          this.cardsBuilt.militaryBuildings.push(card)
+          break
+        case 6:
+          this.cardsBuilt.scientificBuildings.push(card)
+          break
+        case 7:
+          this.cardsBuilt.guilds.push(card)
+          break
+        default:
+          return false
+      }
+    }
+    console.log(this.cardsBuilt)
   }
 
   removeMilitaryScore(score) {

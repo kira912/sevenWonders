@@ -73,7 +73,7 @@ export default new Vuex.Store({
     BUILD_CARD: async (context, payload) => {
       const { data } = await Axios.post('http://localhost:3000/game/player/buildCard', {
         playerName: payload.playerName,
-        card: payload.cardId
+        cardId: payload.cardId
       })
       context.commit('SET_BUILD_CARD', data)
     }
