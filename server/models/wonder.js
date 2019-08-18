@@ -12,6 +12,10 @@ const WonderSchema = new mongoose.Schema({
   faceA: {
     type: Object,
     stepOne: {
+      built: {
+        type: Boolean,
+        default: false
+      },
       type: Object,
       price: {
         type: Object,
@@ -57,6 +61,10 @@ const WonderSchema = new mongoose.Schema({
       }
     },
     stepTwo: {
+      built: {
+        type: Boolean,
+        default: false
+      },
       type: Object,
       default: this.faceAStepOne,
       price: {
@@ -70,6 +78,10 @@ const WonderSchema = new mongoose.Schema({
       }
     },
     stepThree: {
+      built: {
+        type: Boolean,
+        default: false
+      },
       type: Object,
       default: this.faceAStepThree,
       price: {
@@ -138,6 +150,8 @@ const WonderSchema = new mongoose.Schema({
       }
     }]
   }
+}, {
+  minimize: false
 })
 
 const faceAStepOne = {

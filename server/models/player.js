@@ -26,6 +26,8 @@ class Player {
       manufactures: [],
       guilds: []
     }
+
+    this.resources[wonder.defaultResource] = 1
   }
 
   addDeck(deck) {
@@ -53,21 +55,45 @@ class Player {
   }
 
   buildCard(card) {
-    const cardType = card.color
-    console.log(card)
-
     if (card.price.free) {
       this.addCardToType(card)
       return true
     }
 
     for (let resource in card.price) {
-      if (this.resources[resource] >= card.price[resource]) {
-        this.addCardToType(card)
-        console.log(this.cardsBuilt)
-        return true
+      if (this.resources[resource] <= card.price[resource]) {
+        return false
       }
+
+      this.addCardToType(card)
+
+      if ("8" in card.price) {
+        this.gold -= card.price["8"]
+      }
+      
+      return true
     }
+
+    return false
+  }
+
+  buildWonderStep(trashCard, wonderFace, stepToBuild, game) {
+    const step = this.wonder[wonderFace][stepToBuild]
+
+    console.log(step)
+    
+    for (let resource in step.price) {
+      if (this.resources[resource] <= step.price[resource]) {
+        return false
+      }
+
+      step.built = true
+      game.trashCards.push(trashCard)
+      console.log(game)
+
+      return true
+    }
+
     return false
   }
 
