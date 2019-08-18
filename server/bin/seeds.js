@@ -54,6 +54,58 @@ let cardsAge1 = [
   { numberPlayer: 4, name: "Scriptorium", age: 1, data: { symbol: 3 }, price: { 7: 1 }, color: 6 }
 ]
 
+const cardsAge2 = [
+  { numberPlayer: 3, name: "Sawmill", age: 2, data: { 2: 2 }, price: { 8: 1 }, color: 1 },
+  { numberPlayer: 4, name: "Sawmill", age: 2, data: { 2: 2 }, price: { 8: 1 }, color: 1 },
+  { numberPlayer: 3, name: "Quarry", age: 2, data: { 3: 2 }, price: { 8: 1 }, color: 1 },
+  { numberPlayer: 4, name: "Quarry", age: 2, data: { 3: 2 }, price: { 8: 1 }, color: 1 },
+  { numberPlayer: 3, name: "Brickyard", age: 2, data: { 1: 2 }, price: { 8: 1 }, color: 1 },
+  { numberPlayer: 4, name: "Brickyard", age: 2, data: { 1: 2 }, price: { 8: 1 }, color: 1 },
+  { numberPlayer: 3, name: "Foundry", age: 2, data: { 4: 2 }, price: { 8: 1 }, color: 1 },
+  { numberPlayer: 4, name: "Foundry", age: 2, data: { 4: 2 }, price: { 8: 1 }, color: 1 },
+  { numberPlayer: 3, name: "Loom", age: 2, data: { 6: 1 }, price: { free: true }, color: 2 },
+  { numberPlayer: 5, name: "Loom", age: 2, data: { 6: 1 }, price: { free: true }, color: 2 },
+  { numberPlayer: 3, name: "Glassworks", age: 2, data: { 5: 1 }, price: { free: true }, color: 2 },
+  { numberPlayer: 5, name: "Glassworks", age: 2, data: { 5: 1 }, price: { free: true }, color: 2 },
+  { numberPlayer: 3, name: "Press", age: 2, data: { 7: 1 }, price: { free: true }, color: 2 },
+  { numberPlayer: 5, name: "Press", age: 2, data: { 7: 1 }, price: { free: true }, color: 2 },
+  { numberPlayer: 3, name: "Aqueduct", age: 2, data: { score: 5 }, price: { 3: 3 }, color: 3 },
+  { numberPlayer: 7, name: "Aqueduct", age: 2, data: { score: 5 }, price: { 3: 3 }, color: 3 },
+  { numberPlayer: 3, name: "Temple", age: 2, data: { score: 3 }, price: { 3: 3 }, color: 3 },
+  { numberPlayer: 6, name: "Temple", age: 2, data: { score: 3 }, price: { 3: 3 }, color: 3 },
+  { numberPlayer: 3, name: "Statue", age: 2, data: { score: 4 }, price: { 3: 3 }, color: 3 },
+  { numberPlayer: 7, name: "Statue", age: 2, data: { score: 4 }, price: { 3: 3 }, color: 3 },
+  { numberPlayer: 3, name: "Courthouse", age: 2, data: { score: 4 }, price: { 3: 3 }, color: 3 },
+  { numberPlayer: 5, name: "Courthouse", age: 2, data: { score: 4 }, price: { 3: 3 }, color: 3 },
+  { numberPlayer: 3, name: "Forum", age: 2, data: { 5: 1, 6: 1, 7: 1 }, price: { 1: 2 }, color: 4 },
+  { numberPlayer: 6, name: "Forum", age: 2, data: { 5: 1, 6: 1, 7: 1 }, price: { 1: 2 }, color: 4 },
+  { numberPlayer: 7, name: "Forum", age: 2, data: { 5: 1, 6: 1, 7: 1 }, price: { 1: 2 }, color: 4 },
+  { numberPlayer: 3, name: "Caravansery", age: 2, data: { 1: 1, 2: 1, 3: 1, 4: 1 }, price: { 2: 2 }, color: 4 },
+  { numberPlayer: 5, name: "Caravansery", age: 2, data: { 1: 1, 2: 1, 3: 1, 4: 1 }, price: { 2: 2 }, color: 4 },
+  { numberPlayer: 6, name: "Caravansery", age: 2, data: { 1: 1, 2: 1, 3: 1, 4: 1 }, price: { 2: 2 }, color: 4 },
+  { numberPlayer: 3, name: "Vineyard", age: 2, data: { isSpecial: true, forColor: 1, in: 3, gain: { 8: 1} }, price: { 2: 2 }, color: 4 },
+  { numberPlayer: 6, name: "Vineyard", age: 2, data: { isSpecial: true, forColor: 1, in: 3, gain: { 8: 1} }, price: { free: true }, color: 4 },
+  { numberPlayer: 4, name: "Bazar", age: 2, data: { isSpecial: true, forColor: 2, in: 3, gain: { 8: 2} }, price: { free: true }, color: 4 },
+  { numberPlayer: 7, name: "Bazar", age: 2, data: { isSpecial: true, forColor: 2, in: 3, gain: { 8: 2} }, price: { free: true }, color: 4 },
+  { numberPlayer: 3, name: "Walls", age: 2, data: { shield: 2 }, price: { 3: 3 }, color: 5 },
+  { numberPlayer: 7, name: "Walls", age: 2, data: { shield: 2 }, price: { 3: 3 }, color: 5 },
+  { numberPlayer: 4, name: "Training Ground", age: 2, data: { shield: 2 }, price: { 2: 1, 4: 2 }, color: 5 },
+  { numberPlayer: 6, name: "Training Ground", age: 2, data: { shield: 2 }, price: { 2: 1, 4: 2 }, color: 5 },
+  { numberPlayer: 7, name: "Training Ground", age: 2, data: { shield: 2 }, price: { 2: 1, 4: 2 }, color: 5 },
+  { numberPlayer: 3, name: "Stables", age: 2, data: { shield: 2 }, price: { 1: 1, 2: 1, 4: 1 }, color: 5 },
+  { numberPlayer: 5, name: "Stables", age: 2, data: { shield: 2 }, price: { 1: 1, 2: 1, 4: 1 }, color: 5 },
+  { numberPlayer: 3, name: "Archery Range", age: 2, data: { shield: 2 }, price: {  2: 2, 4: 1 }, color: 5 },
+  { numberPlayer: 6, name: "Archery Range", age: 2, data: { shield: 2 }, price: {  2: 2, 4: 1 }, color: 5 },
+  { numberPlayer: 3, name: "Dispensary", age: 2, data: { symbol: 1 }, price: { 4: 2, 5: 1 }, color: 6 },
+  { numberPlayer: 4, name: "Dispensary", age: 2, data: { symbol: 1 }, price: { 4: 2, 5: 1 }, color: 6 },
+  { numberPlayer: 3, name: "Laboratory", age: 2, data: { symbol: 2 }, price: { 1: 2, 7: 1 }, color: 6 },
+  { numberPlayer: 5, name: "Laboratory", age: 2, data: { symbol: 2 }, price: { 1: 2, 7: 1 }, color: 6 },
+  { numberPlayer: 3, name: "Library", age: 2, data: { symbol: 3 }, price: { 2: 2, 6: 1 }, color: 6 },
+  { numberPlayer: 6, name: "Library", age: 2, data: { symbol: 3 }, price: { 2: 2, 6: 1 }, color: 6 },
+  { numberPlayer: 3, name: "School", age: 2, data: { symbol: 3 }, price: { 2: 1, 7: 1 }, color: 6 },
+  { numberPlayer: 7, name: "School", age: 2, data: { symbol: 3 }, price: { 2: 1, 7: 1 }, color: 6 },
+]
+
 const wondersList = [
   {
     name: "Le Colosse de Rhodes",
@@ -150,11 +202,19 @@ async function cleanup() {
   return cleanup;
 }
 
-async function seedsCards() {
+async function seedsCards1() {
   const cards = await Card.create(cardsAge1)
 
   return {
     cardsAgeOne: cards
+  }
+}
+
+async function seedsCards2() {
+  const cards = await Card.create(cardsAge2)
+
+  return {
+    cardsAgeTwo: cards
   }
 }
 
@@ -175,7 +235,8 @@ mongoose.connect("mongodb://localhost/sevenWonders", {
   useNewUrlParser: true
 })
 .then(cleanup)
-.then(seedsCards)
+.then(seedsCards1)
+.then(seedsCards2)
 .then(seedsWonders)
 .catch(err => {
   console.log(err)

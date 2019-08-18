@@ -52,6 +52,32 @@ class Game {
     return false
   }
 
+  async initAgeTwo() {
+    const cardsAge2 = await Card.find({
+      age: 2,
+      numberPlayer: {
+        $lte: this.players.length
+      }
+    })
+
+    if ((cardsAge2.length) % this.players.length === 0) {
+      this.players.forEach((player) => {
+        cardsAge2.sort(() => 0.5 - Math.random())
+        player.addDeck(cardsAge2.splice(0, 7))
+      })
+
+      const distribSuccess = this.distribCardsSuccess(cardsAge2)
+
+      if (!distribSuccess) {
+        return false
+      }
+
+      return true
+    }
+
+    return false
+  }
+
   distribCardsSuccess(cards) {
     const mapDeckPlayers = this.players.map((player) => player.deck)
     let badDistrib = false

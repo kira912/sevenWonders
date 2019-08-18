@@ -56,14 +56,11 @@ class Player {
 
   // TODO not good, need check every resources needed
   buildCard(cardToBuild) {
+
+    let buildPossible = false
+
     if (cardToBuild.price.free) {
-      const cardPushed = this.addCardToType(cardToBuild)
-
-      if (cardPushed) {
-
-        this.deck = this.deck.filter((card) => card._id != cardPushed._id)
-        return true
-      }
+      buildPossible = true
     }
 
     for (let resource in cardToBuild.price) {
@@ -76,17 +73,19 @@ class Player {
       if ("8" in cardToBuild.price) {
         this.gold -= cardToBuild.price["8"]
       }
-
-      const cardPushed = this.addCardToType(cardToBuild)
-
-      if (cardPushed) {
-        this.deck = this.deck.filter((card) => card._id != cardPushed._id)
-
-        return true
-      }
     }
 
-    return false
+    const cardPushed = this.addCardToType(cardToBuild)
+
+    if (cardPushed) {
+      buildPossible = true
+    }
+
+    if (buildPossible) {
+      this.deck = this.deck.filter((card) => card._id != cardToBuild._id)
+    }
+
+    return buildPossible
   }
 
   buildWonderStep(trashCard, wonderFace, stepToBuild, game) {
@@ -99,7 +98,7 @@ class Player {
 
       step.built = true
       game.trashCards.push(trashCard)
-      // console.log(game)
+      this.deck = this.deck.filter((card) => card._id != trashCard._id)
 
       return true
     }
