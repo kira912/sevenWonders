@@ -24,21 +24,21 @@ class Game {
       this.players.push(newPlayer)
     })
 
-    const cardsAge1 = await Card.find({
+    this.cards.age1 = await Card.find({
       age: 1,
       numberPlayer: {
         $lte: this.players.length
       }
     })
 
-    if ((cardsAge1.length) % this.players.length === 0) {
+    if ((this.cards.age1.length) % this.players.length === 0) {
 
       this.players.forEach((player) => {
-        cardsAge1.sort(() => 0.5 - Math.random())
-        player.addDeck(cardsAge1.splice(0, 7))
+        this.cards.age1.sort(() => 0.5 - Math.random())
+        player.addDeck(this.cards.age1.splice(0, 7))
       })
       
-      const distribSuccess = this.distribCardsSuccess(cardsAge1)
+      const distribSuccess = this.distribCardsSuccess(this.cards.age1)
       
       if (!distribSuccess) {
         return false
@@ -52,21 +52,27 @@ class Game {
     return false
   }
 
-  async initAgeTwo() {
-    const cardsAge2 = await Card.find({
-      age: 2,
+  initAge(age) {
+    let cardsAge = this.cards["age" + age]
+    Card.find({
+      age: age,
       numberPlayer: {
         $lte: this.players.length
       }
+    }).then((cards) => {
+      cardsAge = cards
+    })
+    .catch((err) => {
+      console.log(err)
     })
 
-    if ((cardsAge2.length) % this.players.length === 0) {
+    if ((cardsAge.length) % this.players.length === 0) {
       this.players.forEach((player) => {
-        cardsAge2.sort(() => 0.5 - Math.random())
-        player.addDeck(cardsAge2.splice(0, 7))
+        cardsAge.sort(() => 0.5 - Math.random())
+        player.addDeck(cardsAge.splice(0, 7))
       })
 
-      const distribSuccess = this.distribCardsSuccess(cardsAge2)
+      const distribSuccess = this.distribCardsSuccess(cardsAge)
 
       if (!distribSuccess) {
         return false

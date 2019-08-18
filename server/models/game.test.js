@@ -1,5 +1,6 @@
 const Game = require('../models/game')
 const Player = require('../models/player')
+const Card = require('../models/card')
 const gameTest = new Game()
 const wonderTest = {
   name: "Wonder Test",
@@ -139,4 +140,13 @@ test('Player build step wonder', () => {
   expect(playerTest.buildWonderStep(trashCard,"faceA", "stepOne", gameTest)).toBe(true)
   expect(gameTest.trashCards).toEqual(trashCardExpected)
   expect(playerTest.deck).toEqual([])
+})
+
+test('Test init Age 2', () => {
+  let player1 = new Player('Player1', wonderTest)
+  let player2 = new Player('Player2', {})
+  let player3 = new Player('Player3', {})
+
+  console.log(gameTest.initAge(2))
+  expect(gameTest.initAge(2)).toBe(true)
 })
