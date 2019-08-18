@@ -54,24 +54,36 @@ class Player {
     this.militaryScore += score
   }
 
-  buildCard(card) {
-    if (card.price.free) {
-      this.addCardToType(card)
-      return true
+  // TODO not good, need check every resources needed
+  buildCard(cardToBuild) {
+    if (cardToBuild.price.free) {
+      const cardPushed = this.addCardToType(cardToBuild)
+
+      if (cardPushed) {
+
+        this.deck = this.deck.filter((card) => card._id != cardPushed._id)
+        return true
+      }
     }
 
-    for (let resource in card.price) {
-      if (this.resources[resource] <= card.price[resource]) {
+    for (let resource in cardToBuild.price) {
+      if (this.resources[resource] <= cardToBuild.price[resource]) {
+
         return false
       }
 
-      this.addCardToType(card)
-
-      if ("8" in card.price) {
-        this.gold -= card.price["8"]
-      }
       
-      return true
+      if ("8" in cardToBuild.price) {
+        this.gold -= cardToBuild.price["8"]
+      }
+
+      const cardPushed = this.addCardToType(cardToBuild)
+
+      if (cardPushed) {
+        this.deck = this.deck.filter((card) => card._id != cardPushed._id)
+
+        return true
+      }
     }
 
     return false
@@ -80,8 +92,6 @@ class Player {
   buildWonderStep(trashCard, wonderFace, stepToBuild, game) {
     const step = this.wonder[wonderFace][stepToBuild]
 
-    console.log(step)
-    
     for (let resource in step.price) {
       if (this.resources[resource] <= step.price[resource]) {
         return false
@@ -89,7 +99,7 @@ class Player {
 
       step.built = true
       game.trashCards.push(trashCard)
-      console.log(game)
+      // console.log(game)
 
       return true
     }

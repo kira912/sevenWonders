@@ -50,12 +50,13 @@ const wonderTest = {
   
   test('player build card not free', () => {
   let playerTest = new Player('player1', wonderTest)
+  const card1 = { numberPlayer: 3, name: "Card1", age: 1, data: { 1: 1, 3: 1 }, price: { 1: 1, 3: 1, 4: 1 }, color: 1 }
+
   for (prop in playerTest.resources) {
     playerTest.resources[prop] = 3
   }
   
-  const card1 = { numberPlayer: 3, name: "Card1", age: 1, data: { 1: 1, 3: 1 }, price: { 1: 1, 3: 1, 4: 1 }, color: 1 }
-  
+  playerTest.deck.push(card1)
   let cardsBuiltExpected = {
     civilsBuildings: [],
     scientificBuildings: [],
@@ -74,11 +75,13 @@ const wonderTest = {
   
 test('player build card not free and cost only gold', () => {
   let playerTest = new Player('player1', wonderTest)
+  const card1 = { numberPlayer: 3, name: "Card1", age: 1, data: { 1: 1, 3: 1 }, price: { 8: 2 }, color: 1 }
+
   for (prop in playerTest.resources) {
     playerTest.resources[prop] = 3
   }
   
-  const card1 = { numberPlayer: 3, name: "Card1", age: 1, data: { 1: 1, 3: 1 }, price: { 8: 2 }, color: 1 }
+  playerTest.deck.push(card1)
 
   let cardsBuiltExpected = {
     civilsBuildings: [],
@@ -108,6 +111,8 @@ test('player build free card', () => {
     guilds: []
   }
 
+  playerTest.deck.push(freeCard)
+
   expect(playerTest.buildCard(freeCard)).toBe(true)
   expect(playerTest.cardsBuilt).toEqual(cardsBuiltExpected)
 })
@@ -116,17 +121,21 @@ test('Player build card not possible', () => {
   let playerTest = new Player('player1', wonderTest)
   const card1 = { numberPlayer: 3, name: "Card1", age: 1, data: { 1: 1, 3: 1 }, price: { 1: 8, 3: 1, 4: 1 }, color: 1 }
 
+  playerTest.deck.push(card1)
+
   expect(playerTest.buildCard(card1)).toBe(false)
 })
 
 test('Player build step wonder', () => {
   let playerTest = new Player('player1', wonderTest)
+  const trashCard = { numberPlayer: 3, name: "Card1", age: 1, data: { 1: 1, 3: 1 }, price: { 1: 8, 3: 1, 4: 1 }, color: 1 }
+  const trashCardExpected = [trashCard]
+
   for (prop in playerTest.resources) {
     playerTest.resources[prop] = 3
   }
 
-  const trashCard = { numberPlayer: 3, name: "Card1", age: 1, data: { 1: 1, 3: 1 }, price: { 1: 8, 3: 1, 4: 1 }, color: 1 }
-  const trashCardExpected = [trashCard]
+  playerTest.deck.push(trashCard)
 
   expect(playerTest.buildWonderStep(trashCard,"faceA", "stepOne", gameTest)).toBe(true)
   expect(gameTest.trashCards).toEqual(trashCardExpected)
