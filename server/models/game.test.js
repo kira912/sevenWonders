@@ -1,7 +1,6 @@
 const Game = require('../models/game')
 const Player = require('../models/player')
 const Card = require('../models/card')
-const gameTest = new Game()
 const wonderTest = {
   name: "Wonder Test",
   defaultResource: 4,
@@ -127,6 +126,7 @@ test('Player build card not possible', () => {
 })
 
 test('Player build step wonder', () => {
+  let game = new Game()
   let playerTest = new Player('player1', wonderTest)
   const trashCard = { _id: 1, numberPlayer: 3, name: "Card1", age: 1, data: { 1: 1, 3: 1 }, price: { 1: 8, 3: 1, 4: 1 }, color: 1 }
   const trashCardExpected = [trashCard]
@@ -137,16 +137,89 @@ test('Player build step wonder', () => {
 
   playerTest.deck.push(trashCard)
 
-  expect(playerTest.buildWonderStep(trashCard,"faceA", "stepOne", gameTest)).toBe(true)
-  expect(gameTest.trashCards).toEqual(trashCardExpected)
+  expect(playerTest.buildWonderStep(trashCard,"faceA", "stepOne", game)).toBe(true)
+  expect(game.trashCards).toEqual(trashCardExpected)
   expect(playerTest.deck).toEqual([])
 })
 
-test('Test init Age 2', () => {
+test('Next round, switch decks between players', () => {
+  let game = new Game()
+  let deck1 = [{ id: 1, name: "Card1" }, { id: 2, name: "Card2" }, { id: 3, name: "Card3" }, { id: 4, name: "Card4" }, { id: 5, name: "Card5" }, { id: 6, name: "Card6" }, { id: 7, name: "Card7" }]
+  let deck2 = [{ id: 8, name: "Card8" }, { id: 9, name: "Card9" }, { id: 10, name: "Card10" }, { id: 11, name: "Card11" }, { id: 12, name: "Card12" }, { id: 13, name: "Card13" }, { id: 14, name: "Card14" }]
+  let deck3 = [{ id: 15, name: "Card15" }, { id: 16, name: "Card16" }, { id: 17, name: "Card17" }, { id: 18, name: "Card18" }, { id: 19, name: "Card19" }, { id: 20, name: "Card20" }, { id: 21, name: "Card21" }]
+  let player1 = new Player('Player1', wonderTest)
+  player1.deck = deck1
+  let player2 = new Player('Player2', {})
+  player2.deck = deck2
+  let player3 = new Player('Player3', {})
+  player3.deck = deck3
+
+  game.players.push(player1, player2, player3)
+  game.switchDeck(1, player1)
+  game.switchDeck(1, player2)
+  game.switchDeck(1, player3)
+
+  expect(player1.deck).toBe(deck3)
+  expect(player2.deck).toBe(deck1)
+  expect(player3.deck).toBe(deck2)
+  
+})
+
+test('Test end age 1 make war', () => {
+  let game = new Game()
+  let player1 = new Player('Player1', wonderTest)
+  player1.cardsBuilt.militaryBuildings = [{ _id: 1, numberPlayer: 3, name: "CardWar", age: 1, data: { shield: 1 }, price: { 1: 1 }, color: 5 }, { _id: 2, numberPlayer: 3, name: "CardWar", age: 1, data: { shield: 2 }, price: { 1: 1 }, color: 5 }]
+  let player2 = new Player('Player2', {})
+  let player3 = new Player('Player3', {})
+
+  game.players.push(player1, player2, player3)
+  game.endAgeMakeWar(1)
+
+  expect(player1.militaryScore).toBe(2)
+  expect(player2.militaryScore).toBe(-1)
+  expect(player3.militaryScore).toBe(-1)
+})
+
+test('Test end age 2 make war', () => {
+  let game = new Game()
+  let player1 = new Player('Player1', wonderTest)
+  player1.cardsBuilt.militaryBuildings = [{ _id: 1, numberPlayer: 3, name: "CardWar", age: 1, data: { shield: 1 }, price: { 1: 1 }, color: 5 }, { _id: 2, numberPlayer: 3, name: "CardWar", age: 1, data: { shield: 2 }, price: { 1: 1 }, color: 5 }]
+  let player2 = new Player('Player2', {})
+  let player3 = new Player('Player3', {})
+
+  game.players.push(player1, player2, player3)
+  game.endAgeMakeWar(2)
+
+  expect(player1.militaryScore).toBe(6)
+  expect(player2.militaryScore).toBe(-1)
+  expect(player3.militaryScore).toBe(-1)
+})
+
+test('Test end age 3 make war', () => {
+  let game = new Game()
+  let player1 = new Player('Player1', wonderTest)
+  player1.cardsBuilt.militaryBuildings = [{ _id: 1, numberPlayer: 3, name: "CardWar", age: 1, data: { shield: 1 }, price: { 1: 1 }, color: 5 }, { _id: 2, numberPlayer: 3, name: "CardWar", age: 1, data: { shield: 2 }, price: { 1: 1 }, color: 5 }]
+  let player2 = new Player('Player2', {})
+  let player3 = new Player('Player3', {})
+
+  game.players.push(player1, player2, player3)
+  game.endAgeMakeWar(3)
+
+  expect(player1.militaryScore).toBe(10)
+  expect(player2.militaryScore).toBe(-1)
+  expect(player3.militaryScore).toBe(-1)
+})
+
+test('Test end age 3 make war. Nobody have shields', () => {
+  let game = new Game()
   let player1 = new Player('Player1', wonderTest)
   let player2 = new Player('Player2', {})
   let player3 = new Player('Player3', {})
 
-  console.log(gameTest.initAge(2))
-  expect(gameTest.initAge(2)).toBe(true)
+  game.players.push(player1, player2, player3)
+  game.endAgeMakeWar(3)
+
+  expect(player1.militaryScore).toBe(0)
+  expect(player2.militaryScore).toBe(0)
+  expect(player3.militaryScore).toBe(0)
 })

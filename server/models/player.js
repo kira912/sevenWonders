@@ -54,6 +54,10 @@ class Player {
     this.militaryScore += score
   }
 
+  removeMilitaryScore(score) {
+    this.militaryScore -= score
+  }
+
   // TODO not good, need check every resources needed
   buildCard(cardToBuild) {
 
@@ -106,36 +110,36 @@ class Player {
     return false
   }
 
+  getShieldsForWar() {
+
+    const mapShieldsCardsBuilt = this.cardsBuilt.militaryBuildings.map(card => card.data.shield)
+
+    return mapShieldsCardsBuilt.length > 0 ? mapShieldsCardsBuilt.reduce((accumulator, currentValue) => accumulator + currentValue) : 0
+  }
+
   addCardToType(card) {
     switch(card.color) {
       case 1:
         this.cardsBuilt.rawMaterials.push(card)
         return true
-        break
       case 2:
         this.cardsBuilt.manufactures.push(card)
         return true
-        break
       case 3:
         this.cardsBuilt.civilsBuildings.push(card)
         return true
-        break
       case 4:
         this.cardsBuilt.commercialBuildings.push(card)
         return true
-        break
       case 5:
         this.cardsBuilt.militaryBuildings.push(card)
         return true
-        break
       case 6:
         this.cardsBuilt.scientificBuildings.push(card)
         return true
-        break
       case 7:
         this.cardsBuilt.guilds.push(card)
         return true
-        break
       default:
         return false
     }
