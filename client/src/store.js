@@ -51,8 +51,9 @@ export default new Vuex.Store({
     SET_CARDS_RESOURCES_TYPE: (state, cards) => {
       state.cardsResourcesParsed = cards
     },
-    SET_BUILD_CARD: (state, player) => {
-      
+    SET_BUILD_CARD: (state, playerUpdated) => {
+      let indexFounded = this.state.game.players.findIndex(player => player._id == playerUpdated._id)
+      this.state.game.players[indexFounded] = playerUpdated
     }
   },
   actions: {

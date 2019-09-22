@@ -1,7 +1,7 @@
 const express = require('express');
 const router = express.Router();
 const Card = require('../models/card')
-const Wonder = require('../models/wonder')
+const wonders = require('../bin/wonders.json')
 const Player = require('../models/player')
 const Game = require('../models/game')
 const asyncMiddleware = require('../utils/asyncMiddleware');
@@ -17,12 +17,14 @@ router.post('/init', asyncMiddleware(async (req, res, next) => {
 
   if (game) {
     
-    game.wonders = await Wonder.find()
+    game.wonders = wonders
     
     if (game.wonders.length > 0) {
       let gameInit = await game.initGame(players)
       
-      return gameInit ? res.json(true) : res.json(false)
+      return gameInit
+        ? res.json(true)
+        : res.json(false)
     }
   }
   return res.json(false)
@@ -41,6 +43,8 @@ router.post('/player/buildCard', asyncMiddleware(async (req, res, next) => {
     if (card) {
       player.buildCard(card)
     }
+
+    return player
   }
 }))
 

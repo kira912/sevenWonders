@@ -12,7 +12,7 @@ let gameRouter = require('./routes/game');
 
 let app = express();
 
-mongoose.connect("mongodb://localhost/sevenWonders", { useNewUrlParser: true })
+// mongoose.connect("mongodb://localhost/sevenWonders", { useNewUrlParser: true })
 
 if (app.get("env") === "development") {
   app.use(

@@ -1,6 +1,7 @@
 const Game = require('../models/game')
 const Player = require('../models/player')
 const Card = require('../models/card')
+let cardsAge1 = require('../bin/cards1.json')
 const wonderTest = {
   name: "Wonder Test",
   defaultResource: 4,
@@ -44,7 +45,7 @@ const wonderTest = {
   }
 }
 
-  test('player build card not free', () => {
+test('player build card not free', () => {
   let playerTest = new Player('player1', wonderTest)
   const card1 = { _id: 1, numberPlayer: 3, name: "Card1", age: 1, data: { 1: 1, 3: 1 }, price: { 1: 1, 3: 1, 4: 1 }, color: 1 }
 
@@ -142,7 +143,7 @@ test('Player build step wonder', () => {
   expect(playerTest.deck).toEqual([])
 })
 
-test('Next round, switch decks between players', () => {
+test('Age 1 next round, switch decks between players', () => {
   let game = new Game()
   const deck1 = [{ id: 1, name: "Card1" }, { id: 2, name: "Card2" }, { id: 3, name: "Card3" }, { id: 4, name: "Card4" }, { id: 5, name: "Card5" }, { id: 6, name: "Card6" }, { id: 7, name: "Card7" }]
   const deck2 = [{ id: 8, name: "Card8" }, { id: 9, name: "Card9" }, { id: 10, name: "Card10" }, { id: 11, name: "Card11" }, { id: 12, name: "Card12" }, { id: 13, name: "Card13" }, { id: 14, name: "Card14" }]
@@ -163,9 +164,51 @@ test('Next round, switch decks between players', () => {
   
 })
 
+test('Age 2 next round, switch decks between players', () => {
+  let game = new Game()
+  const deck1 = [{ id: 1, name: "Card1" }, { id: 2, name: "Card2" }, { id: 3, name: "Card3" }, { id: 4, name: "Card4" }, { id: 5, name: "Card5" }, { id: 6, name: "Card6" }, { id: 7, name: "Card7" }]
+  const deck2 = [{ id: 8, name: "Card8" }, { id: 9, name: "Card9" }, { id: 10, name: "Card10" }, { id: 11, name: "Card11" }, { id: 12, name: "Card12" }, { id: 13, name: "Card13" }, { id: 14, name: "Card14" }]
+  const deck3 = [{ id: 15, name: "Card15" }, { id: 16, name: "Card16" }, { id: 17, name: "Card17" }, { id: 18, name: "Card18" }, { id: 19, name: "Card19" }, { id: 20, name: "Card20" }, { id: 21, name: "Card21" }]
+  let player1 = new Player('Player1', {})
+  player1.deck = deck1
+  let player2 = new Player('Player2', {})
+  player2.deck = deck2
+  let player3 = new Player('Player3', {})
+  player3.deck = deck3
+
+  game.players.push(player1, player2, player3)
+  game.switchDeck(2)
+
+  expect(player1.deck).toBe(deck2)
+  expect(player2.deck).toBe(deck3)
+  expect(player3.deck).toBe(deck1)
+  
+})
+
+test('Age 3 next round, switch decks between players', () => {
+  let game = new Game()
+  const deck1 = [{ id: 1, name: "Card1" }, { id: 2, name: "Card2" }, { id: 3, name: "Card3" }, { id: 4, name: "Card4" }, { id: 5, name: "Card5" }, { id: 6, name: "Card6" }, { id: 7, name: "Card7" }]
+  const deck2 = [{ id: 8, name: "Card8" }, { id: 9, name: "Card9" }, { id: 10, name: "Card10" }, { id: 11, name: "Card11" }, { id: 12, name: "Card12" }, { id: 13, name: "Card13" }, { id: 14, name: "Card14" }]
+  const deck3 = [{ id: 15, name: "Card15" }, { id: 16, name: "Card16" }, { id: 17, name: "Card17" }, { id: 18, name: "Card18" }, { id: 19, name: "Card19" }, { id: 20, name: "Card20" }, { id: 21, name: "Card21" }]
+  let player1 = new Player('Player1', {})
+  player1.deck = deck1
+  let player2 = new Player('Player2', {})
+  player2.deck = deck2
+  let player3 = new Player('Player3', {})
+  player3.deck = deck3
+
+  game.players.push(player1, player2, player3)
+  game.switchDeck(3)
+
+  expect(player1.deck).toBe(deck3)
+  expect(player2.deck).toBe(deck1)
+  expect(player3.deck).toBe(deck2)
+  
+})
+
 test('Test end age 1 make war', () => {
   let game = new Game()
-  let player1 = new Player('Player1', wonderTest)
+  let player1 = new Player('Player1', {})
   player1.cardsBuilt.militaryBuildings = [{ _id: 1, numberPlayer: 3, name: "CardWar", age: 1, data: { shield: 1 }, price: { 1: 1 }, color: 5 }, { _id: 2, numberPlayer: 3, name: "CardWar", age: 1, data: { shield: 2 }, price: { 1: 1 }, color: 5 }]
   let player2 = new Player('Player2', {})
   let player3 = new Player('Player3', {})
@@ -220,4 +263,43 @@ test('Test end age 3 make war. Nobody have shields', () => {
   expect(player1.militaryScore).toBe(0)
   expect(player2.militaryScore).toBe(0)
   expect(player3.militaryScore).toBe(0)
+})
+
+test('Init Age 1 with 3 players', () => {
+  let game = new Game()
+  let player1 = new Player('Player1', {})
+  let player2 = new Player('Player2', {})
+  let player3 = new Player('Player3', {})
+
+  game.cards.age1 = cardsAge1
+  game.players.push(player1, player2, player3)
+  game.initAge(1)
+
+  expect(player1.deck.length).toBe(7)
+  expect(player2.deck.length).toBe(7)
+  expect(player3.deck.length).toBe(7)
+})
+
+
+test('Init Age 1 with 7 players', () => {
+  let game = new Game()
+  let player1 = new Player('Player1', {})
+  let player2 = new Player('Player2', {})
+  let player3 = new Player('Player3', {})
+  let player4 = new Player('player4', {})
+  let player5 = new Player('player5', {})
+  let player6 = new Player('player6', {})
+  let player7 = new Player('player7', {})
+
+  game.cards.age1 = cardsAge1
+  game.players.push(player1, player2, player3, player4, player5, player6, player7)
+  game.initAge(1)
+
+  expect(player1.deck.length).toBe(7)
+  expect(player2.deck.length).toBe(7)
+  expect(player3.deck.length).toBe(7)
+  expect(player4.deck.length).toBe(7)
+  expect(player5.deck.length).toBe(7)
+  expect(player6.deck.length).toBe(7)
+  expect(player7.deck.length).toBe(7)
 })

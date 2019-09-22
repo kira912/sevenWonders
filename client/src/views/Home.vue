@@ -64,17 +64,17 @@ export default {
     ]),
   },
   methods: {
-    getResourceType: function(value) {
+    getResourceType(value) {
       return Object.keys(this.resourcesValue).find((key) => {
         return this.resourcesValue[key] == value
       })
     },
-    getColorType: function (value) {
+    getColorType(value) {
       return Object.keys(this.cardColor).find((key) => {
         return this.cardColor[key] == value
       })
     },
-    buildCard: function(player, card) {
+    buildCard(player, card) {
       this.$store.dispatch('BUILD_CARD', {
         playerName: player,
         cardId: card
@@ -87,7 +87,6 @@ export default {
             return false
           }
 
-          console.log(player)
         // }
       // })
       return true

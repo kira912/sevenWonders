@@ -1,7 +1,7 @@
 const Wonder = require('../models/wonder')
 const Player = require('../models/player')
 const Card = require('../models/card')
-
+const cardsAge1 = require('../bin/cards1.json')
 class Game {
   constructor() {
     this.gold = 200
@@ -25,22 +25,17 @@ class Game {
   
         this.players.push(newPlayer)
       })
+
+      let cardsAge1Filtered = cardsAge1.filter(card => card.age == 1 && card.numberPlayer <= this.players.length)
   
-      this.cards.age1 = await Card.find({
-        age: 1,
-        numberPlayer: {
-          $lte: this.players.length
-        }
-      })
-  
-      if ((this.cards.age1.length) % this.players.length === 0) {
+      if ((cardsAge1Filtered.length) % this.players.length === 0) {
   
         this.players.forEach((player) => {
-          this.cards.age1.sort(() => 0.5 - Math.random())
-          player.addDeck(this.cards.age1.splice(0, 7))
+          cardsAge1Filtered.sort(() => 0.5 - Math.random())
+          player.addDeck(cardsAge1Filtered.splice(0, 7))
         })
         
-        const distribSuccess = this.distribCardsSuccess(this.cards.age1)
+        const distribSuccess = this.distribCardsSuccess(cardsAge1Filtered)
         
         if (!distribSuccess) {
           return false
@@ -58,26 +53,17 @@ class Game {
   }
 
   initAge(age) {
-    let cardsAge = this.cards["age" + age]
-    Card.find({
-      age: age,
-      numberPlayer: {
-        $lte: this.players.length
-      }
-    }).then((cards) => {
-      cardsAge = cards
-    })
-    .catch((err) => {
-      console.log(err)
-    })
+    let cards = this.cards[`age${age}`]
 
-    if ((cardsAge.length) % this.players.length === 0) {
+    let cardsFiltered = cards.filter(card => card.age == age && card.numberPlayer <= this.players.length)
+
+    if ((cardsFiltered.length) % this.players.length === 0) {
       this.players.forEach((player) => {
-        cardsAge.sort(() => 0.5 - Math.random())
-        player.addDeck(cardsAge.splice(0, 7))
+        cardsFiltered.sort(() => 0.5 - Math.random())
+        player.addDeck(cardsFiltered.splice(0, 7))
       })
 
-      const distribSuccess = this.distribCardsSuccess(cardsAge)
+      const distribSuccess = this.distribCardsSuccess(cards)
 
       if (!distribSuccess) {
         return false
@@ -96,20 +82,35 @@ class Game {
         ? this.players[i - 1] 
         : this.players[this.players.length - 1]
   
-      let leftPlayer = this.players[i + 1] 
-        ? this.players[i + 1]
+        let leftPlayer = this.players[i + 1] 
+        ? this.players[i + 1] 
         : this.players[0]
-  
-      // console.log(player.name, player.deck, rightPlayer.tmpDeck, leftPlayer.tmpDeck)
+      
+      player['tmpDeck'] = new Map()
+
       if (1 == age || 3 == age) {
-        player.tmpDeck = new Map()
         player.tmpDeck.set("oldDeck", player.deck)
         player.tmpDeck.set("newDeck", rightPlayer.deck)
         player.deck = rightPlayer.tmpDeck
           ? rightPlayer.tmpDeck.get("oldDeck")
           : rightPlayer.deck
-        // console.log("Deck player", player.name, player.tmpDeck)
       }
+      
+      if (2 == age) {
+        player.tmpDeck.set("oldDeck", player.deck)
+        player.tmpDeck.set("newDeck", leftPlayer.deck)
+        player.deck = leftPlayer.tmpDeck
+          ? leftPlayer.tmpDeck.get("oldDeck")
+          : leftPlayer.deck
+      }
+    }
+
+    this.clearTmpDecks()
+  }
+
+  clearTmpDecks() {
+    for (let player of this.players) {
+      player.clearTmpDeck()
     }
   }
 
@@ -121,8 +122,13 @@ class Game {
 
       let shields = player.getShieldsForWar()
 
-      let rightPlayer = this.players[i + 1] ? this.players[i + 1] : this.players[0]
-      let leftPlayer = this.players[i - 1] ? this.players[i - 1] : this.players[this.players.length - 1]
+      let leftPlayer = this.players[i + 1] 
+        ? this.players[i + 1] 
+        : this.players[0]
+
+      let rightPlayer = this.players[i - 1] 
+        ? this.players[i - 1] 
+        : this.players[this.players.length - 1]
 
       if (rightPlayer && leftPlayer) {
         if (shields > rightPlayer.getShieldsForWar() && shields > leftPlayer.getShieldsForWar()) {
@@ -144,14 +150,15 @@ class Game {
     const mapDeckPlayers = this.players.map((player) => player.deck)
     let badDistrib = false
 
-    // mapDeckPlayers[1] = []
     mapDeckPlayers.forEach((deck) => {
       if (deck.length != (cards.length) / this.players.length) {
         badDistrib = true
       }
     })
 
-    return !badDistrib ? true : false 
+    return !badDistrib 
+      ? true 
+      : false 
   }
 
   get wonders() {

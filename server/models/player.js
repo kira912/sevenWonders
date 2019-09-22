@@ -58,7 +58,12 @@ class Player {
     this.militaryScore -= score
   }
 
-  // TODO not good, need check every resources needed
+  clearTmpDeck() {
+    if (this.tmpDeck.has('oldDeck') && this.tmpDeck.has('newDeck')) {
+      this.tmpDeck.clear()
+    }
+  }
+
   buildCard(cardToBuild) {
 
     let buildPossible = false
@@ -73,7 +78,6 @@ class Player {
         return false
       }
 
-      
       if ("8" in cardToBuild.price) {
         this.gold -= cardToBuild.price["8"]
       }
@@ -89,6 +93,7 @@ class Player {
       this.deck = this.deck.filter((card) => card._id != cardToBuild._id)
     }
 
+    console.log('debug',buildPossible)
     return buildPossible
   }
 
@@ -114,7 +119,9 @@ class Player {
 
     const mapShieldsCardsBuilt = this.cardsBuilt.militaryBuildings.map(card => card.data.shield)
 
-    return mapShieldsCardsBuilt.length > 0 ? mapShieldsCardsBuilt.reduce((accumulator, currentValue) => accumulator + currentValue) : 0
+    return mapShieldsCardsBuilt.length > 0 
+      ? mapShieldsCardsBuilt.reduce((accumulator, currentValue) => accumulator + currentValue) 
+      : 0
   }
 
   addCardToType(card) {
@@ -143,9 +150,6 @@ class Player {
       default:
         return false
     }
-  }
-  removeMilitaryScore(score) {
-    this.militaryScore -= score
   }
 }
 
