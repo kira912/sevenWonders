@@ -90,14 +90,25 @@ class Game {
   }
 
   switchDeck(age) {
+    
     for (let [i, player] of this.players.entries()) {
-      let rightPlayer = this.players[i + 1] ? this.players[i + 1] : this.players[0]
-      let leftPlayer = this.players[i - 1] ? this.players[i - 1] : this.players[this.players.length - 1]
+      let rightPlayer = this.players[i - 1] 
+        ? this.players[i - 1] 
+        : this.players[this.players.length - 1]
   
+      let leftPlayer = this.players[i + 1] 
+        ? this.players[i + 1]
+        : this.players[0]
+  
+      // console.log(player.name, player.deck, rightPlayer.tmpDeck, leftPlayer.tmpDeck)
       if (1 == age || 3 == age) {
-        // console.log(rightPlayer.deck)
-        player.deck = leftPlayer.deck
-        continue
+        player.tmpDeck = new Map()
+        player.tmpDeck.set("oldDeck", player.deck)
+        player.tmpDeck.set("newDeck", rightPlayer.deck)
+        player.deck = rightPlayer.tmpDeck
+          ? rightPlayer.tmpDeck.get("oldDeck")
+          : rightPlayer.deck
+        // console.log("Deck player", player.name, player.tmpDeck)
       }
     }
   }

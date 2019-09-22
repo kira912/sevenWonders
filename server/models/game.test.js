@@ -144,10 +144,10 @@ test('Player build step wonder', () => {
 
 test('Next round, switch decks between players', () => {
   let game = new Game()
-  let deck1 = [{ id: 1, name: "Card1" }, { id: 2, name: "Card2" }, { id: 3, name: "Card3" }, { id: 4, name: "Card4" }, { id: 5, name: "Card5" }, { id: 6, name: "Card6" }, { id: 7, name: "Card7" }]
-  let deck2 = [{ id: 8, name: "Card8" }, { id: 9, name: "Card9" }, { id: 10, name: "Card10" }, { id: 11, name: "Card11" }, { id: 12, name: "Card12" }, { id: 13, name: "Card13" }, { id: 14, name: "Card14" }]
-  let deck3 = [{ id: 15, name: "Card15" }, { id: 16, name: "Card16" }, { id: 17, name: "Card17" }, { id: 18, name: "Card18" }, { id: 19, name: "Card19" }, { id: 20, name: "Card20" }, { id: 21, name: "Card21" }]
-  let player1 = new Player('Player1', wonderTest)
+  const deck1 = [{ id: 1, name: "Card1" }, { id: 2, name: "Card2" }, { id: 3, name: "Card3" }, { id: 4, name: "Card4" }, { id: 5, name: "Card5" }, { id: 6, name: "Card6" }, { id: 7, name: "Card7" }]
+  const deck2 = [{ id: 8, name: "Card8" }, { id: 9, name: "Card9" }, { id: 10, name: "Card10" }, { id: 11, name: "Card11" }, { id: 12, name: "Card12" }, { id: 13, name: "Card13" }, { id: 14, name: "Card14" }]
+  const deck3 = [{ id: 15, name: "Card15" }, { id: 16, name: "Card16" }, { id: 17, name: "Card17" }, { id: 18, name: "Card18" }, { id: 19, name: "Card19" }, { id: 20, name: "Card20" }, { id: 21, name: "Card21" }]
+  let player1 = new Player('Player1', {})
   player1.deck = deck1
   let player2 = new Player('Player2', {})
   player2.deck = deck2
@@ -155,9 +155,7 @@ test('Next round, switch decks between players', () => {
   player3.deck = deck3
 
   game.players.push(player1, player2, player3)
-  game.switchDeck(1, player1)
-  game.switchDeck(1, player2)
-  game.switchDeck(1, player3)
+  game.switchDeck(1)
 
   expect(player1.deck).toBe(deck3)
   expect(player2.deck).toBe(deck1)
