@@ -8,7 +8,9 @@ const asyncMiddleware = require('../utils/asyncMiddleware');
 let game = null
 
 router.get('/',(req, res, next) => {
-  return game ? res.json(game) : res.json(false)
+  return game 
+    ? res.json(game) 
+    : res.json(false)
 })
 
 router.post('/init', asyncMiddleware(async (req, res, next) => {
@@ -31,21 +33,17 @@ router.post('/init', asyncMiddleware(async (req, res, next) => {
 }))
 
 router.post('/player/buildCard', asyncMiddleware(async (req, res, next) => {
-  let player = game.players.find((player) => {
-    return player.name == req.body.playerName
-  })
+  let player = game.players.find(player => player.name == req.body.playerName)
 
   if (player) {
-    let card = player.deck.find((card) => {
-      return card._id == req.body.cardId
-    })
+    let card = player.deck.find(card => card._id == req.body.cardId)
 
     if (card) {
       player.buildCard(card)
+      // console.log(player)
     }
-
-    return player
   }
+  return player
 }))
 
 module.exports = router

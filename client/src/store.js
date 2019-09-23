@@ -52,6 +52,7 @@ export default new Vuex.Store({
       state.cardsResourcesParsed = cards
     },
     SET_BUILD_CARD: (state, playerUpdated) => {
+      console.log(playerUpdated)
       let indexFounded = this.state.game.players.findIndex(player => player._id == playerUpdated._id)
       this.state.game.players[indexFounded] = playerUpdated
     }
@@ -76,6 +77,7 @@ export default new Vuex.Store({
         playerName: payload.playerName,
         cardId: payload.cardId
       })
+      console.log(data)
       context.commit('SET_BUILD_CARD', data)
     }
     // GET_CARDS_RESOURCES_TYPE: async (context, payload) => {

@@ -21,7 +21,7 @@ class Game {
     try {
       playersNameList.forEach((name) => {
         const randomWonder = this.wonders[Math.floor(Math.random() * this.wonders.length)]
-        let newPlayer = new Player(name, randomWonder)
+        const newPlayer = new Player(name, randomWonder)
   
         this.players.push(newPlayer)
       })

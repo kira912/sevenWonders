@@ -90,10 +90,10 @@ class Player {
     }
 
     if (buildPossible) {
-      this.deck = this.deck.filter((card) => card._id != cardToBuild._id)
+      this.deck = this.deck.filter(card => card._id != cardToBuild._id)
+      console.log(this.deck)
     }
 
-    console.log('debug',buildPossible)
     return buildPossible
   }
 

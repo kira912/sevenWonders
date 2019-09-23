@@ -48,6 +48,8 @@ const wonderTest = {
 test('player build card not free', () => {
   let playerTest = new Player('player1', wonderTest)
   const card1 = { _id: 1, numberPlayer: 3, name: "Card1", age: 1, data: { 1: 1, 3: 1 }, price: { 1: 1, 3: 1, 4: 1 }, color: 1 }
+  const card2 = {_id: 2}
+  const card3 = {_id: 3}
 
   for (prop in playerTest.resources) {
     playerTest.resources[prop] = 3
@@ -63,11 +65,11 @@ test('player build card not free', () => {
     guilds: []
   }
 
-  playerTest.deck.push(card1)
+  playerTest.deck.push(card1, card2, card3)
   
   expect(playerTest.buildCard(card1)).toBe(true)
   expect(playerTest.cardsBuilt).toEqual(cardsBuiltExpected)
-  expect(playerTest.deck).toEqual([])
+  expect(playerTest.deck).toEqual([card2, card3])
 })
 
   
